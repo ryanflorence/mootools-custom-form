@@ -30,7 +30,6 @@ var CustomForm = new Class({
 	},
 
 	initialize: function (element, options){
-		console.log('what?')
 		this.setOptions(options);
 		this.element = document.id(element);
 		this.register = [];
@@ -46,7 +45,6 @@ var CustomForm = new Class({
 	},
 
 	factory: function (klass, elements){
-		console.log('huh?')
 		elements.each(function(element){
 			if (this.register.contains(element) || (klass == CustomInput.Select && element.get('size'))) return;
 			this.register.push(new klass(element));
