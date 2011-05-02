@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<form id=fixture>
+<form id=tehformz>
   <p>
     <input type=checkbox name=checkbox id=checkbox> <label for=checkbox>Cookies</label><br>
     <input type=radio name=radios id=red> <label for=red>Red</label><br>
@@ -26,6 +26,15 @@
       <option value=One>One</option>
       <option value=Two>Two</option>
       <option value=Three>Three</option>
+    </select><br>
+    <select size=5>
+      <option>Don't change me!</option>
+      <option>Don't change me!</option>
+      <option>Don't change me!</option>
+      <option>Don't change me!</option>
+      <option>Don't change me!</option>
+      <option>Don't change me!</option>
+      <option>Don't change me!</option>
     </select>
   </p>
 
@@ -39,15 +48,11 @@
 <script src=../Source/Checkbox.js></script>
 <script src=../Source/Radio.js></script>
 <script src=../Source/Select.js></script>
+<script src=../Source/CustomForm.js></script>
 <script>
-  new CustomInput.Checkbox('checkbox');
-
-  $$('input[type=radio]').each(function(element){
-    new CustomInput.Radio(element);
-  });
-
-  new CustomInput.Select('select');
-  
+document.addEvent('domready', function (){
+  new CustomForm('tehformz');
+})  
 </script>
 
 

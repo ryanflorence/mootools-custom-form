@@ -11,4 +11,4 @@ sources:
   - "Source/Checkbox.js"
   - "Source/Radio.js"
   - "Source/Select.js"
-  - "Source/Form.js"
+  - "Source/CustomForm.js"
