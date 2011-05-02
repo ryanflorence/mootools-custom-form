@@ -1,0 +1,14 @@
+name: "CustomInput"
+
+author: "Ryan Florence"
+
+copyright: "&copy; [Ryan Florence](http://ryanflorence.com)"
+
+license: "MIT-style license."
+
+sources:
+  - "Source/CustomInput.js"
+  - "Source/Checkbox.js"
+  - "Source/Radio.js"
+  - "Source/Select.js"
+  - "Source/Form.js"

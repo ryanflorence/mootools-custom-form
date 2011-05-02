@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv=Content-type content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../Source/assets/styles.css" type="text/css" charset="utf-8">
+  <style>
+    body {
+      font-family: helvetica, arial;
+      color: #444;
+      background: #fff;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  </style>
+  <title>all.html</title>
+</head>
+<body>
+
+<form id=fixture>
+  <p>
+    <input type=checkbox name=checkbox id=checkbox> <label for=checkbox>Cookies</label><br>
+    <input type=radio name=radios id=red> <label for=red>Red</label><br>
+    <input type=radio name=radios id=green> <label for=green>Green</label><br>
+    <input type=radio name=radios id=blue> <label for=blue>Blue</label><br>
+    <select id=select name=select style="width: 100px">
+      <option value=One>One</option>
+      <option value=Two>Two</option>
+      <option value=Three>Three</option>
+    </select>
+  </p>
+
+</form>
+
+
+
+<!--script src="http://localhost:8888/depender/build?require=CustomInput/Checkbox,CustomInput/Radio"></script-->
+<script src=mootools.js></script>
+<script src=../Source/CustomInput.js></script>
+<script src=../Source/Checkbox.js></script>
+<script src=../Source/Radio.js></script>
+<script src=../Source/Select.js></script>
+<script>
+  new CustomInput.Checkbox('checkbox');
+
+  $$('input[type=radio]').each(function(element){
+    new CustomInput.Radio(element);
+  });
+
+  new CustomInput.Select('select');
+  
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Uses packager to build the demo dependencies
+# Assumes you've got packager in your path
+packager build CustomInput/Form > Demos/mootools.js
