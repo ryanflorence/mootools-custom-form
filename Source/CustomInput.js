@@ -51,7 +51,7 @@ provides: [CustomInput]
 			this.element.setStyle('opacity', 0).setStyle('visibility', 'visible');
 			this.element.addEvents(this.sharedEvents)
 				.addEvent('click', this.boundClick)
-				.addClass(this.options.className + '_element');
+				.addClass('custom_input_element ' + this.options.className + '_element');
 			return this;
 		},
 
