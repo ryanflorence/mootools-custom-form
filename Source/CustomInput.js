@@ -19,17 +19,18 @@ provides: [CustomInput]
 ...
 */
 
-;(function (){
+(function (){
 	var id = 0;
-	function getId (){ return ++id }
-	function f () { return false; };
+	function getId (){ return ++id; }
+	function f () { return false; }
 
 	var CustomInput = this.CustomInput = new Class({
 
 		Implements: [Options, Events],
 
 		options: {
-			className: 'custom_input'
+			className: 'custom_input',
+			position: true
 		},
 
 		sharedEvents: {},
@@ -38,15 +39,17 @@ provides: [CustomInput]
 			this.setOptions(options);
 			this.element = document.id(element);
 
-			['mousedown', 'mouseup', 'mouseenter', 'mouseleave', 'focus', 'blur'].each(function (event){
-				this.sharedEvents[event] = this[event].bind(this)
-			}, this)
-			this.boundClick = this.click.bind(this)
+			['mousedown', 'mouseup', 'mouseenter', 'mouseleave', 'focus', 'blur', 'change'].each(function (event){
+				this.sharedEvents[event] = this[event].bind(this);
+			}, this);
+			this.boundClick = this.click.bind(this);
 
 			this.setupElement().createMask();
+
+			this.element.store('custom_input', this);
 		},
 
-		setupElement: function(){
+		setupElement: function (){
 			if (this.element.getStyle('position') === 'static') this.element.setStyle('position', 'relative');
 			this.element.setStyle('opacity', 0).setStyle('visibility', 'visible');
 			this.element.addEvents(this.sharedEvents)
@@ -55,9 +58,9 @@ provides: [CustomInput]
 			return this;
 		},
 
-		createMask: function(){
+		createMask: function (){
 			var id = this.element.get('id') || this.makeId(),
-				index = this.element.get('z-index')
+				index = this.element.get('z-index');
 
 			this.mask = new Element('label', {
 				'for': id,
@@ -66,25 +69,30 @@ provides: [CustomInput]
 					MozUserSelect: 'none',
 					WebkitUserSelect: 'none'
 				}
-			}).addClass(this.options.className).position({
+			}).addClass(this.options.className);
+
+			if (this.options.position) this.mask.position({
 				relativeTo: this.element,
 				position: 'upperLeft'
-			}).inject(this.element, 'before');
+			});
+
+			if (this.element.get('disabled')) this.mask.addClass('disabled');
+			this.mask.inject(this.element, 'before');
 
 			this.mask.onselectstart = this.ondragstart = f;
 
-			document.getElements('label[for='+id+']').addEvents(this.sharedEvents)
+			document.getElements('label[for='+id+']').addEvents(this.sharedEvents);
 
-			return this
+			return this;
 		},
 
-		makeId: function(){
+		makeId: function (){
 			var id = 'custom-element-id-' + getId();
 			this.element.set('id', id);
 			return id;
 		},
 
-		click: function(){
+		click: function (){
 			this.mask.toggleClass('clicked');
 		},
 
@@ -92,7 +100,7 @@ provides: [CustomInput]
 			this.mask.addClass('active');
 		},
 
-		mouseup: function(){
+		mouseup: function (){
 			this.mask.removeClass('active');
 		},
 
@@ -104,13 +112,29 @@ provides: [CustomInput]
 			this.mask.removeClass('hover');
 		},
 
-		focus: function(){
+		focus: function (){
 			this.mask.addClass('focus');
 		},
 
-		blur: function(){
+		blur: function (){
 			this.mask.removeClass('focus');
-		}
-	})
+		},
 
-}).call(this)
+		change: function (){}
+	});
+
+}).call(this);
+
+Element.Properties.disabled = {
+	set: function (value){
+		this.disabled = value;
+		var instance = this.retrieve('custom_input');
+		if (!instance) return;
+		instance.mask[(value ? 'add' : 'remove') + 'Class']('disabled');
+	}, 
+ 
+	get: function(){ 
+		return this.disabled;
+	}
+};
+

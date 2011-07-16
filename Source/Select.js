@@ -31,18 +31,18 @@ CustomInput.Select = new Class({
 		this.element.addEvent('change', this.updateLabel.bind(this));
 	},
 
-	resizeMask: function(){
+	resizeMask: function (){
 		this.mask.setStyle('width', this.element.getSize().x);
 		return this;
 	},
 
-	createLabel: function(){
+	createLabel: function (){
 		this.label = new Element('span').inject(this.mask, 'top');
 		return this;
 	},
 
-	updateLabel: function(){
-		this.label.set('text', this.element.get('value'));
+	updateLabel: function (){
+		this.label.set('text', this.element.getElement(':selected').get('text'));
 		return this;
 	}
 

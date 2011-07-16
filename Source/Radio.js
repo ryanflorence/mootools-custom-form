@@ -38,11 +38,12 @@ provides: [Radio]
 
 		initialize: function (element, options){
 			this.parent(element, options);
+			if (this.element.get('checked')) this.mask.addClass('on');
 			this.group = _pushInstance(this);
 		},
 
 		click: function (){
-			this.mask[(this.element.value === 'on' ? 'add' : 'remove') + 'Class']('on');
+			this.mask[(this.element.get('checked') ? 'add' : 'remove') + 'Class']('on');
 			this.group.each(function(instance){
 				if (instance !== this) instance.deselect();
 			}, this);

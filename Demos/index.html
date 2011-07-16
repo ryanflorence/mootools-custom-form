@@ -19,13 +19,13 @@
 <form id=tehformz>
   <p>
     <input type=checkbox name=checkbox id=checkbox> <label for=checkbox>Cookies</label><br>
-    <input type=radio name=radios id=red> <label for=red>Red</label><br>
+    <input type=radio name=radios id=red checked> <label for=red>Red</label><br>
     <input type=radio name=radios id=green> <label for=green>Green</label><br>
     <input type=radio name=radios id=blue> <label for=blue>Blue</label><br>
     <select id=select name=select style="width: 100px">
-      <option value=One>One</option>
-      <option value=Two>Two</option>
-      <option value=Three>Three</option>
+      <option value=1>Option One</option>
+      <option value=2>Option Two</option>
+      <option value=3>Option Three</option>
     </select><br>
     <select size=5>
       <option>Don't change me!</option>
@@ -37,21 +37,30 @@
       <option>Don't change me!</option>
     </select>
   </p>
-
 </form>
 
+<p>
+  <input type=checkbox name=disabled id=disabled> <label for=disabled>This should be disabled</label>
+  <button id=disableIt>toggle disabled</button>
+</p>
 
 
 <!--script src="http://localhost:8888/depender/build?require=CustomInput/Checkbox,CustomInput/Radio"></script-->
-<script src=mootools.js></script>
-<script src=../Source/CustomInput.js></script>
-<script src=../Source/Checkbox.js></script>
-<script src=../Source/Radio.js></script>
-<script src=../Source/Select.js></script>
-<script src=../Source/CustomForm.js></script>
+<script src="mootools.js"></script>
+<script src="../Source/CustomInput.js"></script>
+<script src="../Source/Checkbox.js"></script>
+<script src="../Source/Radio.js"></script>
+<script src="../Source/Select.js"></script>
+<script src="../Source/CustomForm.js"></script>
 <script>
 document.addEvent('domready', function (){
   new CustomForm('tehformz');
+  var disabled = $('disabled');
+  new CustomInput.Checkbox(disabled)
+  var flag = false;
+  $('disableIt').addEvent('click', function (){
+    disabled.set('disabled', flag = !flag);
+  })
 })  
 </script>
 

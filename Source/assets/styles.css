@@ -41,6 +41,14 @@
 	background-position: -133px -261px;
 }
 
+.custom_checkbox.disabled {
+  background-position: -152px -261px;
+}
+
+.custom_checkbox.on.disabled {
+  background-position: -171px -261px;
+}
+
 /* @end */
 
 /* @group .custom_radio */
